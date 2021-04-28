@@ -1,18 +1,16 @@
-import React from 'react';
-import './App.css';
+import React from "react";
+import "./App.css";
 
 import Products from "./components/Products";
-import Basket from "./components/Basket";
-
+import Cart from "./components/Cart";
 
 class App extends React.Component {
-
   render() {
     return (
       <div className="container">
         <div className="container-header">
           <h3>Shopping Cart</h3>
-          <Basket />
+          <Cart />
         </div>
         <div className="row">
           <Products />

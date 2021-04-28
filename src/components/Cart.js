@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 
-class Basket extends Component {
+class Cart extends Component {
   state = {
     isShowing: false,
   }
@@ -60,4 +60,4 @@ const mapStateToProps = (state) => ({
   cartItems: state.cart.items,
 });
 
-export default connect(mapStateToProps)(Basket);
+export default connect(mapStateToProps)(Cart);
