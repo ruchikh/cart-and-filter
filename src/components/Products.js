@@ -11,25 +11,27 @@ class Products extends Component {
   }
 
   render() {
-    const { cartItems, products } = this.props;
-
+    const { cartItems, products, addToCart } = this.props;
+    
     return (
       <div className="row">
         {products && products.map((product) => {
+          const { id, title, price, sku } = product;
+
           return (
             <div className="col-md-3 my-5" key={product.id}>
               <div className="thumbnail text-center">
                 <a
-                  href={`#${product.id}`}
-                  onClick={(e) => this.props.addToCart(this.props.cartItems, product)}
+                  href={`#${id}`}
+                  onClick={(e) => addToCart(cartItems, product)}
                 >
-                  <img src={require(`./images/${product.sku}_1.jpg`)} alt={product.title} />
-                  <p>{product.title}</p>
+                  <img src={require(`./images/${sku}_1.jpg`)} alt={title} />
+                  <p>{title}</p>
                 </a>
-                <b>{product.price}</b>
+                <b>{`Price: ${price} `}</b>
                 <button
                   className="btn btn-primary"
-                  onClick={(e) => this.props.addToCart(cartItems, product)}
+                  onClick={(e) => addToCart(cartItems, product)}
                 >
                   Add to cart
                 </button>

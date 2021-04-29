@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 
+import { removeFromCart } from "../actions/cartActions";
+
 class Cart extends Component {
   state = {
     isShowing: false,
@@ -13,21 +15,24 @@ class Cart extends Component {
   }
 
   render() {
-    const { cartItems } = this.props;
+    const { cartItems, removeFromCart } = this.props,
+          { isShowing } = this.state,
+          total = cartItems.reduce((a, c) => a + c.price * c.count, 0)
 
     return (
       <div className="cart-container">
         <i className="fa fa-2x fa-shopping-cart" onClick = {this.handleClick}></i>
         {cartItems.length}
-        {this.state.isShowing &&
+        {isShowing &&
           <div className="cart__items">
           <div>
-            <ul style={{ marginLeft: -25 }}>
-              {cartItems.map((item) => (
+            <ul className="cart-list">
+              {cartItems && cartItems.map((item) => (
                 <li key={item.id}>
                   <b>{item.title}</b>
                   <button
                     className="btn btn-danger btn-xs"
+                    onClick={(e) => removeFromCart(cartItems, item)}
                   >
                     X
                   </button>
@@ -36,18 +41,20 @@ class Cart extends Component {
                 </li>
               ))}
             </ul>
-            <div>
-              Sum:
-              {
-                cartItems.reduce((a, c) => a + c.price * c.count, 0)
-              }
-            </div>
-            <button
-              onClick={() => alert("Successfully Checkout")}
-              className="btn btn-primary ml-5"
-            >
-            Checkout
-            </button>
+            <hr />
+            {cartItems.length > 0 ?
+              <div className="cart-checkout">
+                <p>{`Total: ${total}`}</p>
+                <button
+                  onClick={() => alert("Successfully Checkout")}
+                  className="btn btn-primary ml-5"
+                >
+                  Checkout
+                </button>
+              </div>
+              :
+              <p>Your cart have no items</p>
+            }
           </div>
         </div>
       }
@@ -60,4 +67,4 @@ const mapStateToProps = (state) => ({
   cartItems: state.cart.items,
 });
 
-export default connect(mapStateToProps)(Cart);
+export default connect(mapStateToProps, {removeFromCart})(Cart);
