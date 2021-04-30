@@ -137,12 +137,6 @@ hr {
   border: none;
   background: rgb(255, 255, 0);
 }
-.data-container {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
-  grid-gap: 20px;
-  margin-top: 15px;
-}
 
 ul {
   padding: 0;
@@ -219,3 +213,12 @@ hr {
   position: absolute;
   right: 10px;
 }
+
+.cart-container {
+  cursor: pointer;
+}
+
+
+
+
+
