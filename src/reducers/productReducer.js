@@ -5,8 +5,6 @@ import {
   const initState = {
 		items: [],
     filteredItems: [],
-    size: "",
-    sort: ""
   };
 
   export default function (state = initState, action) {
